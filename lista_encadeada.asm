@@ -10,7 +10,7 @@ main: # Só pra testar a lista
 	# Guarda o endereço do ponteiro em s0
 	la s0, pointer
 	
-	jal ra, lista_criar
+	#jal ra, lista_criar
 	
 	
 	li a0, 1
@@ -52,7 +52,7 @@ lista_inserir: # Insere um elemento no topo da lista
 	
 	lw t0, 0(s0)
 	beq t0, zero, retorno # Retorna da função se a lista não foi criada
-	beq s1, zero, lista_vazia # Caso especial da inserção
+	beq s1, zero, lista_vazia # Caso especial da inserção para lista vazia
 	
 	add t1, zero, a0 # Guarda o elemento em t1
 	
@@ -79,16 +79,15 @@ lista_remover_topo: # Remove um elemento no topo da lista
 	# Retornos: N/A
 	
 	# Retorna se a lista for vazia ou não criada
+	beq zero, s1, retorno
 	lw t0, 0(s0)
 	beq zero, t0, retorno
-	beq zero, s1, retorno
 	
 	lw t0, 4(t0) # Atualiza o endereço apontado pelo elemento anterior
 	sw t0, 0(s0) # Atualiza o endereço apontado pelo pointer
 	
 	addi s1, s1, -1 # Decrementa o tamanho da lista
 	jr ra
-
 	
 lista_topo: # Retorna o elemento no topo da lista
 	# Parâmetros: N/A
@@ -96,8 +95,11 @@ lista_topo: # Retorna o elemento no topo da lista
 	# - a0: elemento no topo da lista
 	# - a1: configura o sucesso da operação. 0 = sucesso, 1 = falha
 	
-	beq zero, s1, falha # Retorna que a operação falhou
+	# Retorna que a operação falhou (lista vazia ou não criada)
+	beq zero, s1, falha 
 	lw t0, 0(s0)
+	beq zero, t0, falha
+	
 	lw a0, 0(t0)
 	add a1, zero, zero # Sucesso na operação
 	
