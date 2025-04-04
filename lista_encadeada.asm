@@ -6,13 +6,12 @@ pointer: .word 0 # Ponteiro da lista encadeada que aponta para o 1o elemento. In
 	.align 2
 	.globl main
 	
-main:
+main: # Só pra testar a lista
 	# Guarda o endereço do ponteiro em s0
 	la s0, pointer
 	
 	jal ra, lista_criar
-	# Guarda o endereço da memória alocada em pointer
-	sw a0, 0(s0)
+	
 	
 	li a0, 1
 	jal ra, lista_inserir
@@ -39,19 +38,21 @@ lista_criar: # Aloca memória para inicializar a lista
 	li a0, 8
 	ecall
 	
+	# Guarda o endereço alocado em pointer
+	sw a0, 0(s0) 
+	
 	# Guarda o número de elementos em s1
 	add s1, zero, zero
-	
 	jr ra
 	
-lista_inserir: # Insere um elemento na cabeça da lista
+lista_inserir: # Insere um elemento no topo da lista
 	# Parâmetros:
 	# - a0: elemento a ser inserido
 	# Retornos: N/A
 	
 	lw t0, 0(s0)
-	beq t0, zero, retorno # Retorna se a lista não foi criada
-	beq s1, zero, lista_vazia
+	beq t0, zero, retorno # Retorna da função se a lista não foi criada
+	beq s1, zero, lista_vazia # Caso especial da inserção
 	
 	add t1, zero, a0 # Guarda o elemento em t1
 	
@@ -73,7 +74,7 @@ lista_vazia: # Não há necessidade de alocar memória para inserção do elemen
 	addi s1, s1, 1
 	jr ra
 	
-lista_remover_topo: # Remove o elemento no topo da lista
+lista_remover_topo: # Remove um elemento no topo da lista
 	# Parâmetros: N/A
 	# Retornos: N/A
 	
@@ -89,7 +90,7 @@ lista_remover_topo: # Remove o elemento no topo da lista
 	jr ra
 
 	
-lista_topo:
+lista_topo: # Retorna o elemento no topo da lista
 	# Parâmetros: N/A
 	# Retornos:
 	# - a0: elemento no topo da lista
