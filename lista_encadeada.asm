@@ -7,10 +7,7 @@ pointer: .word 0 # Ponteiro da lista encadeada que aponta para o 1o elemento. In
 	.globl main
 	
 main: # Só pra testar a lista
-	# Guarda o endereço do ponteiro em s0
-	la s0, pointer
-	
-	#jal ra, lista_criar
+	jal ra, lista_criar
 	
 	
 	li a0, 1
@@ -38,7 +35,8 @@ lista_criar: # Aloca memória para inicializar a lista
 	li a0, 8
 	ecall
 	
-	# Guarda o endereço alocado em pointer
+	# Guarda o endereço alocado em pointer (s0)
+	la s0, pointer
 	sw a0, 0(s0) 
 	
 	# Guarda o número de elementos em s1
