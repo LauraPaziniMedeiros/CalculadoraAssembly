@@ -35,6 +35,9 @@ lista_criar: # Aloca memória para inicializar a lista
 	li a0, 8
 	ecall
 	
+	# Encerra o programa se a alocação não for bem sucedida
+	beq a0, zero, the_end
+	
 	# Guarda o endereço alocado em pointer (s0)
 	la s0, pointer
 	sw a0, 0(s0) 
@@ -58,6 +61,9 @@ lista_inserir: # Insere um elemento no topo da lista
 	li a7, 9
 	li a0, 8
 	ecall
+	
+	# Encerra o programa se a alocação não for bem sucedida
+	beq a0, zero, the_end
 	
 	sw t1, 0(a0) # Guarda o elemento no endereço alocado
 	sw t0, 4(a0) # Guarda o endereço do elemento anterior nos outros 4 bytes alocados
