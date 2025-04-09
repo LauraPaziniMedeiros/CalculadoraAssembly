@@ -8,19 +8,17 @@ pointer: .word 0 # Ponteiro da lista encadeada que aponta para o 1o elemento. In
 	
 main: # Só pra testar a lista
 	jal ra, lista_criar
-	
-	
-	li a0, 1
-	jal ra, lista_inserir
-	li a0, 2
-	jal ra, lista_inserir
-	li a0, 3
-	jal ra, lista_inserir
-	jal ra, lista_remover_topo
-	jal ra, lista_remover_topo
-	
 	jal ra, lista_topo
+	jal ra, lista_remover_topo
+	addi a0, zero, 1
+	jal ra, lista_inserir
+	jal ra ,lista_remover_topo
+	jal ra, lista_remover_topo
+	jal ra, lista_topo
+	
+	
 	li a7, 1
+	add a0, a1, zero
 	ecall
 	
 	j the_end
@@ -87,7 +85,10 @@ lista_remover_topo: # Remove um elemento no topo da lista
 	lw t0, 0(s0)
 	beq zero, t0, retorno
 	
-	lw t0, 4(t0) # Atualiza o endereço apontado pelo elemento anterior
+	lw t0, 4(t0) # Atualiza t0 com endereço do elemento anterior
+	# Se t0 for 0, o elemento removido era o único elemeto na lista
+	# Retorna da função para não atualizar o pointer com um endereço nulo
+	beq t0, zero, retorno
 	sw t0, 0(s0) # Atualiza o endereço apontado pelo pointer
 	
 	addi s1, s1, -1 # Decrementa o tamanho da lista
