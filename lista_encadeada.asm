@@ -13,8 +13,16 @@ main: # Só pra testar a lista
 	addi a0, zero, 1
 	jal ra, lista_inserir
 	jal ra ,lista_remover_topo
-	jal ra, lista_remover_topo
 	jal ra, lista_topo
+	jal ra, lista_remover_topo
+	addi a0, zero, 1
+jal ra, lista_inserir
+addi a0, zero, 1
+jal ra, lista_inserir
+jal ra ,lista_remover_topo
+	jal ra, lista_topo
+	jal ra, lista_remover_topo
+
 	
 	
 	li a7, 1
@@ -85,12 +93,16 @@ lista_remover_topo: # Remove um elemento no topo da lista
 	lw t0, 0(s0)
 	beq zero, t0, retorno
 	
-	lw t0, 4(t0) # Atualiza t0 com endereço do elemento anterior
-	# Se t0 for 0, o elemento removido era o único elemeto na lista
+	lw t1, 4(t0) # t1 recebe o endereço do elemento anterior
+	# Se t1 for 0, o elemento removido era o único elemento na lista
 	# Retorna da função para não atualizar o pointer com um endereço nulo
-	beq t0, zero, retorno
-	sw t0, 0(s0) # Atualiza o endereço apontado pelo pointer
+	beq t1, zero, remover_aux
+	sw t1, 0(s0) # Atualiza o endereço apontado pelo pointer
 	
+	addi s1, s1, -1 # Decrementa o tamanho da lista
+	jr ra
+remover_aux:
+	sw t1, 0(t0)
 	addi s1, s1, -1 # Decrementa o tamanho da lista
 	jr ra
 	
