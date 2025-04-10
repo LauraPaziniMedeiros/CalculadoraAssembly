@@ -5,6 +5,7 @@ strNumero:  	.asciz "Digite um numero: "
 strOperacao:  	.asciz "Escolha uma operacao: "
 str_erroUndo:  	.asciz "Não existe valor anterior"
 str_erroDivisao:.asciz "Sem dividir por 0 bobinha(o)(e)"
+str_op_invalida:.asciz "Operação inválida\n"
     		.align 2
 ponteiro_lista: .word 0 			# Ponteiro da lista encadeada que aponta para o 1o elemento. Inicializado em 0
 opSoma:		.word 43			# "+"
@@ -64,6 +65,10 @@ selecao:
 		beq t1, s3, subtracao
 		beq t1, s4, multiplicacao
 		beq t1, s5, divisao
+		la a0, str_op_invalida 		# Volta para a seleção no caso de uma operação inválida
+		addi a7, zero, 4
+		ecall
+		j seletor_loop
 		
 soma:
 		add t3, t0, t2
@@ -137,8 +142,8 @@ undo:
     		bne a1, zero, erroUndo
 
     		jal ra, lista_remover_topo
-    		jal ra, lista_topo        	# verificar se o elemento no topo da lista
-    		bne a1, zero, auxErroUndo    	# verifico se a operação foi um sucesso e caso não, imprimo uma mensagem de erro
+    		jal ra, lista_topo        	# verificar se existe um elemento no topo da lista
+    		bne a1, zero, auxErroUndo    	# verifico se a operação foi um sucesso e, caso não, imprimo uma mensagem de erro
     
 
     		add t3, a0, zero    		# atribuo o valor que estava no topo da lista para o meu resultado atual
