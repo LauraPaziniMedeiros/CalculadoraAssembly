@@ -37,10 +37,8 @@ leitura_inicio:
 		ecall
 		add t0, zero, a0		# primeiro operando para t0
 		
-    		la a0, linha_vazia  		# imprimir \n
-    		addi a7, zero, 4
-    		ecall
     		
+    		addi a7, zero, 4
     		la a0,  strOperacao 		 # imprimir mensagem para leitura de uma operacao
     		ecall
 
@@ -88,7 +86,7 @@ multiplicacao:
 divisao:
     		beq t2, zero, erroDivisao
 		div  t3, t0, t2
-    		add a0, t0, zero 
+    		add a0, t3, zero 
     		jal ra, lista_inserir
 		
 loop_principal:
