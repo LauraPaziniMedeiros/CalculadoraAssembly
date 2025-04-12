@@ -223,7 +223,7 @@ saida:
 # FUNCOES REFERENTES A LISTA ENCADEADA
 
 #-------------------------------------------------------------
-# Função lista_criar
+# Funcao lista_criar
 # Aloca memoria para inicializar a lista
 # Parametros: N/A
 # Retornos:
@@ -247,7 +247,7 @@ lista_criar:
 		jr ra				# Retorna da funcao
 
 #-------------------------------------------------------------
-# Função lista_inserir
+# Funcao lista_inserir
 # Insere um elemento no topo da lista
 # Parametros:
 # - a0: elemento a ser inserido
@@ -296,6 +296,7 @@ lista_vazia:
 #-------------------------------------------------------------
 lista_remover_topo: 
 		# Retorna se a lista for vazia ou nao criada
+		beq zero, s1, retorno 		# Se nao ha elementos na lista, retorna
 		beq zero, s1, retorno 		# Se nao ha elementos na lista, retorna
 		lw t0, 0(s0)			# t0 recebe ponteiro para ultimo elemento da lista
 		beq zero, t0, retorno		# Se ponteiro for nulo, retorna
