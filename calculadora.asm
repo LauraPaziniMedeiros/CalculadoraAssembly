@@ -276,8 +276,8 @@ lista_inserir:
 
 #-------------------------------------------------------------
 # Funcao lista_vazia
-# Faz a insercao do primeiro elemento.
-# Nao e necessaria alocacao de memoria pois o espaco ja foi alocado.
+# Função auxiliar para a função lista_inserir. Faz a insercao quando a lista é vazia.
+# Nao e necessaria alocacao de memoria pois o espaco ja foi alocado em lista_criar.
 # Parametros:
 # - a0: elemento a ser inserido
 # Retornos: N/A
@@ -296,7 +296,7 @@ lista_vazia:
 #-------------------------------------------------------------
 lista_remover_topo: 
 		# Retorna se a lista for vazia ou nao criada
-		beq zero, s1, retorno 		# Se nao ha� elementos na lista, retorna
+		beq zero, s1, retorno 		# Se nao ha elementos na lista, retorna
 		lw t0, 0(s0)			# t0 recebe ponteiro para ultimo elemento da lista
 		beq zero, t0, retorno		# Se ponteiro for nulo, retorna
 		
