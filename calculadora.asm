@@ -1,7 +1,7 @@
 # Grupo:
 # 	Fernando Valentim Torres	15452340
 # 	Laura Pazini Medeiros		15468452
-# 	Luysa de Souza Gon�alves	15474077
+# 	Luysa de Souza Gonçalves	15474077
 # 	Pedro Henrique Perez Dias	15484075
 
 # Dados utilizados no programa
@@ -280,8 +280,8 @@ lista_inserir:
 		addi s1, s1, 1 			# Incrementa o tamanho da lista
 		jr ra				# Retorna da funcao
 
-# Auxiliar para a função lista_inserir. Faz a insercao quando a lista é vazia.
-# Nao e necessaria alocacao de memoria pois o espaco ja foi alocado em lista_criar.
+# Auxiliar para a funcao lista_inserir. Faz a insercao quando a lista eh vazia.
+# Nao eh necessaria alocacao de memoria pois o espaco ja foi alocado em lista_criar.
 lista_vazia:
 		sw a0, 0(t0)			# Insere primeiro elemento da lista
 		sw zero, 4(t0) 			# Nao existe elemento anterior para ser enderecado, portanto armazena 0		
