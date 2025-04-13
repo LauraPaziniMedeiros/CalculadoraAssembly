@@ -274,8 +274,6 @@ lista_inserir:
 		addi s1, s1, 1 			# Incrementa o tamanho da lista
 		jr ra				# Retorna da funcao
 
-
-
 # Auxiliar para a função lista_inserir. Faz a insercao quando a lista é vazia.
 # Nao e necessaria alocacao de memoria pois o espaco ja foi alocado em lista_criar.
 lista_vazia:
