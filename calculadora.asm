@@ -274,14 +274,10 @@ lista_inserir:
 		addi s1, s1, 1 			# Incrementa o tamanho da lista
 		jr ra				# Retorna da funcao
 
-#-------------------------------------------------------------
-# Funcao lista_vazia
-# Função auxiliar para a função lista_inserir. Faz a insercao quando a lista é vazia.
+
+
+# Auxiliar para a função lista_inserir. Faz a insercao quando a lista é vazia.
 # Nao e necessaria alocacao de memoria pois o espaco ja foi alocado em lista_criar.
-# Parametros:
-# - a0: elemento a ser inserido
-# Retornos: N/A
-#-------------------------------------------------------------
 lista_vazia:
 		sw a0, 0(t0)			# Insere primeiro elemento da lista
 		sw zero, 4(t0) 			# Nao existe elemento anterior para ser enderecado, portanto armazena 0		
