@@ -1,3 +1,9 @@
+# Grupo:
+# 	Fernando Valentim Torres	15452340
+# 	Laura Pazini Medeiros		15468452
+# 	Luysa de Souza Gonçalves	15474077
+# 	Pedro Henrique Perez Dias	15484075
+
 # Dados utilizados no programa
 		.data
 		.align 0
